@@ -9,11 +9,12 @@ import open from 'open';
 import startServer from '../lib/server.js';
 import writeStatic from '../lib/static.js';
 import exportPDF from '../lib/print.js';
-import { loadJSON } from '../lib/util.js';
+import { package_json, help_string } from '../lib/config.defaults.js' with { type: 'macro' };
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
-const pkg = loadJSON(path.join(__dirname, '../package.json'));
+const pkg = package_json();
+// loadJSON(path.join(__dirname, '../package.json'));
 
 const alias = {
   h: 'help',
@@ -61,7 +62,8 @@ updater({ pkg }).notify();
       process.exit(1);
     }
   } else {
-    const help = await readFile(path.join(__dirname, './help.txt'));
-    console.log(help.toString());
+    // const help = await readFile(path.join(__dirname, './help.txt'));
+    // console.log(help.toString());
+    console.log(help_string());
   }
 })();
